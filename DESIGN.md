@@ -1,5 +1,7 @@
 # Hantke Bautrocknung — design and offer brief
 
+Current implementation: the guided enquiry refinement in JOURNEY-DESIGN.md supersedes the historical compositions below. PRODUCT.md records durable product truth. The generated floor image has been removed from served assets. Situation guidance is optional, selections persist into an editable form summary, contact controls use restrained rectangular geometry, and the mobile request dialog occupies the full screen. The Cover-inspired architectural opening, self-hosted typography and business facts remain.
+
 Audience: Hamburg homeowners aged 30–60, leaning older, often worried and in a hurry. Premium competence without complexity. One primary action, readable controls, a visible telephone alternative. No fake availability, ratings, savings, or project photography.
 
 ## Source of business facts

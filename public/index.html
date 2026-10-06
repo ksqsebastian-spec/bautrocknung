@@ -28,8 +28,8 @@
         >Hantke.<small>Bautrocknung</small></a
       >
       <nav id="main-nav" aria-label="Hauptnavigation">
-        <a href="#leistungen">Leistungen</a><a href="#ablauf">Ablauf</a
-        ><a href="#fragen">Fragen</a>
+        <a href="#anliegen">Ihr Anliegen</a><a href="#leistungen">Technik</a
+        ><a href="#ablauf">Ablauf</a><a href="#fragen">Fragen</a>
       </nav>
       <div class="header-actions">
         <a class="mobile-phone" href="tel:+491783570038">Anrufen</a
@@ -97,36 +97,120 @@
               ><span>Telefon & PLZ genügen</span>
             </p>
           </div>
-          <p class="image-caption">Architekturaufnahme · Symbolbild</p>
+          <p class="image-caption">
+            <span class="desktop-copy">Architekturaufnahme · </span>Symbolbild
+          </p>
           <a
             class="scroll-cue"
-            href="#leistungen"
-            aria-label="Leistungen entdecken"
+            href="#anliegen"
+            aria-label="Passenden nächsten Schritt finden"
+            ><span>Nächster Schritt</span
             ><svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 4v15m-6-6 6 6 6-6" /></svg
           ></a>
         </div>
       </section>
-      <div
-        class="assurance-strip wrap"
-        aria-label="Was Sie vor und nach der Trocknung wissen"
+      <section
+        id="anliegen"
+        class="journey section wrap"
+        aria-labelledby="journey-title"
       >
-        <div>
-          <strong>Vorab geklärt.</strong>
-          <p>Besichtigungskosten am Telefon.</p>
+        <div class="journey-choice">
+          <h2 id="journey-title">Was ist bei Ihnen passiert?</h2>
+          <p class="journey-intro">
+            Sie müssen die Ursache nicht kennen. Wählen Sie, was Sie gerade
+            sehen.
+          </p>
+          <fieldset class="situation-list">
+            <legend class="sr-only">Ihre Situation — Auswahl freiwillig</legend>
+            <label
+              ><input
+                type="radio"
+                name="situation"
+                value="Wasserschaden"
+              /><span
+                >Wasser ist ausgetreten<small
+                  >Rohrbruch, Leck oder übergelaufenes Wasser</small
+                ></span
+              ></label
+            >
+            <label
+              ><input type="radio" name="situation" value="Feuchte Wand" /><span
+                >Wand oder Boden ist feucht<small
+                  >Flecken oder Feuchtigkeit ohne klare Ursache</small
+                ></span
+              ></label
+            >
+            <label
+              ><input
+                type="radio"
+                name="situation"
+                value="Neubau / Estrich"
+              /><span
+                >Neubau oder Estrich trocknen<small
+                  >Vorbereiten für den nächsten Bauabschnitt</small
+                ></span
+              ></label
+            >
+            <label
+              ><input
+                type="radio"
+                name="situation"
+                value="Unklar"
+                checked
+              /><span
+                >Ich bin noch unsicher<small
+                  >Die Situation gemeinsam einordnen</small
+                ></span
+              ></label
+            >
+          </fieldset>
+          <a class="plan-link" href="#next-step"
+            >Ihren nächsten Schritt ansehen
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4v15m-6-6 6 6 6-6" /></svg
+          ></a>
         </div>
-        <div>
-          <strong>Schriftlich geplant.</strong>
-          <p>Kostenrahmen vor Geräteaufbau.</p>
+        <div class="next-step" id="next-step">
+          <div id="plan-copy" aria-live="polite" aria-atomic="true">
+            <h3 id="plan-title">Erst Klarheit. Dann der passende Plan.</h3>
+            <p id="plan-description">
+              Wir besprechen, was Ihnen aufgefallen ist, und klären, ob eine
+              Messung vor Ort sinnvoll ist.
+            </p>
+          </div>
+          <dl class="plan-details">
+            <div>
+              <dt>Im ersten Gespräch</dt>
+              <dd>Situation und Besichtigungskosten klären</dd>
+            </div>
+            <div>
+              <dt>Vor Geräteaufbau</dt>
+              <dd>Messung und schriftlicher Kostenrahmen</dd>
+            </div>
+            <div>
+              <dt>Zum Abschluss</dt>
+              <dd>Abschlussmessung und Trocknungsbericht</dd>
+            </div>
+          </dl>
+          <p id="plan-caution" hidden>
+            Bei laufendem Wasseraustritt kontaktieren Sie bitte direkt einen
+            zuständigen Notdienst.
+          </p>
+          <button class="button full" data-request>
+            Rückruf anfordern
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12h15m-6-6 6 6-6 6" />
+            </svg>
+          </button>
+          <p class="plan-promise">Binnen 2 Geschäftsstunden · Unverbindlich</p>
+          <p class="plan-footnote">
+            Die Auswahl ist eine Orientierung, keine Ferndiagnose.
+          </p>
         </div>
-        <div>
-          <strong>Messbar abgeschlossen.</strong>
-          <p>Abschlussmessung & Trocknungsbericht.</p>
-        </div>
-      </div>
+      </section>
       <section id="leistungen" class="services section">
         <div class="wrap">
-          <p class="section-index">01 / Technik, die Klarheit schafft</p>
           <div class="technical-intro" data-reveal>
             <h2>Trockenheit ist messbar.</h2>
             <p>
@@ -136,22 +220,27 @@
             </p>
           </div>
           <div class="engineering-grid">
-            <figure class="engineering-visual" data-reveal data-phase="0">
-              <div class="material-scene">
-                <img
-                  src="/floor-principle.jpg"
-                  width="1536"
-                  height="1024"
-                  loading="lazy"
-                  alt="Schematisch auseinandergezogener Bodenaufbau: Belag, Estrich, Dämmschicht und Rohdecke. Keine Darstellung eines konkreten Bauprojekts."
-                />
-                <div class="material-labels" aria-hidden="true">
-                  <span>Belag<i></i></span><span>Estrich<i></i></span
-                  ><span>Dämmschicht<i></i></span><span>Rohdecke<i></i></span>
+            <figure class="floor-section" data-reveal>
+              <h3>Die Oberfläche erzählt nicht alles.</h3>
+              <p>
+                Feuchte kann unter dem Belag sitzen. Deshalb prüfen wir den
+                Bodenaufbau.
+              </p>
+              <div
+                class="floor-layers"
+                aria-label="Schematischer Bodenquerschnitt"
+              >
+                <div class="layer-cover"><span>Belag</span></div>
+                <div class="layer-screed"><span>Estrich</span></div>
+                <div class="layer-insulation">
+                  <span>Dämmschicht</span
+                  ><small>Hier kann Feuchte verborgen sein.</small>
                 </div>
+                <div class="layer-concrete"><span>Rohdecke</span></div>
               </div>
               <figcaption>
-                Prinzipdarstellung · Bodenaufbau kann abweichen
+                Prinzipdarstellung · Aufbau und Verfahren werden vor Ort
+                geprüft.
               </figcaption>
             </figure>
             <div
@@ -253,7 +342,6 @@
       </section>
       <section id="ablauf" class="process section">
         <div class="wrap">
-          <p class="section-index">02 / Unser Ablauf</p>
           <div class="process-intro">
             <h2 data-reveal>
               Ihr Rückruf.<br /><span class="subhead-sans"
@@ -306,7 +394,6 @@
       </section>
       <section id="fragen" class="questions section wrap">
         <div data-reveal>
-          <p class="section-index">03 / Ihre Fragen</p>
           <h2>Gut zu wissen.</h2>
           <p class="faq-intro">
             Klare Antworten.<br />Bevor Sie sich entscheiden.
@@ -445,7 +532,9 @@
             >0178 357 00 38 · werktags</a
           >
         </div>
-        <p class="image-caption">Architekturaufnahme · Symbolbild</p>
+        <p class="image-caption">
+          <span class="desktop-copy">Architekturaufnahme · </span>Symbolbild
+        </p>
       </section>
     </main>
     <footer class="footer wrap">
@@ -492,12 +581,31 @@
         </button>
       </div>
       <div id="request-flow">
-        <h2 id="request-title" tabindex="-1">Wir rufen Sie zurück.</h2>
+        <h2 id="request-title" tabindex="-1">Ihr nächster Schritt.</h2>
         <p class="dialog-intro">
-          Binnen <strong>2 Geschäftsstunden.</strong><br />Den nächsten Schritt
-          klären wir persönlich.
+          Ein persönlicher Rückruf binnen <strong>2 Geschäftsstunden.</strong>
         </p>
         <form id="request-form">
+          <div class="request-summary">
+            <div>
+              <span>Ihr Anliegen</span
+              ><strong id="request-situation"
+                >Die Situation gemeinsam einordnen</strong
+              >
+            </div>
+            <button type="button" id="change-situation">Ändern</button>
+          </div>
+          <label class="field optional-field" id="situation-editor" hidden
+            >Situation <span>(optional)</span>
+            <select name="problem">
+              <option value="Unklar">Noch unklar</option>
+              <option value="Wasserschaden">Wasser ist ausgetreten</option>
+              <option value="Feuchte Wand">Wand oder Boden ist feucht</option>
+              <option value="Neubau / Estrich">
+                Neubau oder Estrich trocknen
+              </option>
+            </select>
+          </label>
           <label class="field"
             >Telefonnummer<input
               name="phone"
@@ -507,7 +615,7 @@
               required
               minlength="7"
               maxlength="25"
-              pattern="[+0-9 ()\-]{7,25}"
+              pattern="[+0-9 \(\)\-]{7,25}"
           /></label>
           <label class="field"
             >Postleitzahl<input
@@ -520,17 +628,10 @@
               pattern="[0-9]{5}"
               maxlength="5"
           /></label>
-          <label class="field optional-field"
-            >Situation <span>(optional)</span
-            ><select name="problem">
-              <option value="Unklar">Noch unklar</option>
-              <option value="Wasserschaden">Wasserschaden</option>
-              <option value="Feuchte Wand">Feuchte Wand oder Boden</option>
-              <option value="Neubau / Estrich">
-                Neubau oder Estrich trocknen
-              </option>
-            </select></label
-          >
+          <p class="callback-expectation">
+            Wir klären die Situation und die Besichtigungskosten. Den Ortstermin
+            vereinbaren wir im Gespräch.
+          </p>
           <label class="trap" aria-hidden="true"
             >Website<input
               name="website"
@@ -560,9 +661,25 @@
         </form>
       </div>
       <section id="request-success" hidden aria-live="polite">
-        <div class="success-mark" aria-hidden="true">✓</div>
+        <div class="success-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10" /></svg>
+        </div>
         <h2 id="success-title">Anfrage angekommen.</h2>
         <p id="success-message"></p>
+        <ol class="confirmation-steps">
+          <li>
+            <strong>Anfrage erhalten</strong
+            ><span>Ihre Angaben sind sicher gespeichert.</span>
+          </li>
+          <li>
+            <strong>Rückruf binnen 2 Geschäftsstunden</strong
+            ><span>Situation und Besichtigungskosten klären.</span>
+          </li>
+          <li>
+            <strong>Ortstermin persönlich abstimmen</strong
+            ><span>Erst danach folgt die Messung vor Ort.</span>
+          </li>
+        </ol>
         <div class="request-reference">
           Ihre Referenz <strong id="reference"></strong>
         </div>

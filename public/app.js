@@ -10,6 +10,8 @@ function openRequest(event) {
   dialog.setAttribute("aria-labelledby", "request-title");
   document.querySelector("#form-error").hidden = true;
   closeMenu();
+  updateRequestSummary();
+  document.querySelector("#situation-editor").hidden = true;
   dialog.showModal();
   document.querySelector("#request-title").focus({ preventScroll: true });
   if (!reducedMotion.matches)
@@ -81,6 +83,11 @@ dialog.addEventListener("click", (e) => {
 });
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  form.elements.phone.setCustomValidity(
+    form.elements.phone.value.replace(/\D/g, "").length < 7
+      ? "Bitte geben Sie eine Telefonnummer mit mindestens sieben Ziffern ein."
+      : "",
+  );
   if (!form.reportValidity()) return;
   const button = document.querySelector("#submit-request"),
     error = document.querySelector("#form-error");
@@ -95,7 +102,10 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
+    const result = await response.json().catch(() => ({
+      error:
+        "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns an.",
+    }));
     if (!response.ok)
       throw new Error(
         result.error ||
@@ -106,13 +116,16 @@ form.addEventListener("submit", async (e) => {
     dialog.setAttribute("aria-labelledby", "success-title");
     document.querySelector("#reference").textContent = result.reference;
     document.querySelector("#success-message").textContent = result.notified
-      ? "Ihre Anfrage wurde per E-Mail an das Projektteam weitergeleitet. Wir rufen Sie binnen 2 Geschäftsstunden zurück und stimmen den nächsten Schritt persönlich ab."
+      ? "Ihre Anfrage wurde per E-Mail an das Projektteam weitergeleitet. So geht es weiter:"
       : "Ihre Anfrage ist sicher gespeichert. Die E-Mail-Zustellung wird erneut versucht. Das Projektteam kann Ihre Anfrage auch im geschützten Posteingang sehen.";
     document.querySelector("#success-close").focus();
     form.reset();
     requestId = crypto.randomUUID();
   } catch (err) {
-    error.textContent = err.message;
+    error.textContent =
+      err instanceof TypeError
+        ? "Die Verbindung hat nicht geklappt. Bitte versuchen Sie es erneut oder rufen Sie uns an."
+        : err.message;
     error.hidden = false;
     error.scrollIntoView({ block: "nearest" });
   } finally {
@@ -155,7 +168,7 @@ function updateScene() {
     return;
   }
   const height = hero.offsetHeight;
-  header.classList.toggle("solid", scrollY > height - 105);
+  header.classList.toggle("solid", scrollY > height - header.offsetHeight - 24);
   if (reducedMotion.matches) {
     heroFrame.style.clipPath = "";
     heroPicture.style.transform = "";
@@ -202,15 +215,28 @@ document.querySelectorAll("[data-reveal]").forEach((el) => {
   revealObserver.observe(el);
 });
 const mobileBar = document.querySelector("#mobile-bar");
-const contactObserver = new IntersectionObserver((entries) => {
-  const entry = entries[0];
-  mobileBar?.classList.toggle(
-    "visible",
-    !entry.isIntersecting && entry.boundingClientRect.top < 0,
-  );
-});
+const visibleContactActions = new Set();
+let passedHeroAction = false;
 const heroRequest = document.querySelector("#hero-request");
-if (heroRequest) contactObserver.observe(heroRequest);
+const contactObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.target === heroRequest)
+        passedHeroAction = entry.boundingClientRect.top < 0;
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.8)
+        visibleContactActions.add(entry.target);
+      else visibleContactActions.delete(entry.target);
+    });
+    mobileBar?.classList.toggle(
+      "visible",
+      passedHeroAction && visibleContactActions.size === 0,
+    );
+  },
+  { threshold: [0, 0.8] },
+);
+document
+  .querySelectorAll("main [data-request]")
+  .forEach((action) => contactObserver.observe(action));
 // Animate native details while preserving keyboard operation and the static fallback.
 document.querySelectorAll(".faq details").forEach((details) => {
   const summary = details.querySelector("summary"),
@@ -243,7 +269,6 @@ document.querySelectorAll(".faq details").forEach((details) => {
 });
 
 // A short technical explanation, never a simulated measurement or live dashboard.
-const engineering = document.querySelector(".engineering-visual");
 document.querySelectorAll("[data-method]").forEach((button) => {
   button.addEventListener("click", () => {
     const selected = button.dataset.method;
@@ -262,6 +287,92 @@ document.querySelectorAll("[data-method]").forEach((button) => {
           { duration: 350, easing: "ease-out" },
         );
     });
-    if (engineering) engineering.dataset.phase = willOpen ? selected : "none";
   });
 });
+
+// Optional guidance: a useful plan before asking for contact details. No diagnosis or invented availability.
+const situations = {
+  Unklar: {
+    label: "Die Situation gemeinsam einordnen",
+    title: "Erst Klarheit. Dann der passende Plan.",
+    description:
+      "Wir besprechen, was Ihnen aufgefallen ist, und klären, ob eine Messung vor Ort sinnvoll ist.",
+  },
+  Wasserschaden: {
+    label: "Wasser ist ausgetreten",
+    title: "Den Schaden eingrenzen. Räume zurückgewinnen.",
+    description:
+      "Nach dem Stoppen des Wasseraustritts prüfen wir, welche Bauteile betroffen sind. Daraus entsteht der Plan für Trocknung und Wiederherstellung.",
+  },
+  "Feuchte Wand": {
+    label: "Wand oder Boden ist feucht",
+    title: "Erst messen. Dann gezielt trocknen.",
+    description:
+      "Wir prüfen Wand, Bodenaufbau und Raumluft. Welche Trocknung sinnvoll ist, entscheiden die Messung und die Situation vor Ort.",
+  },
+  "Neubau / Estrich": {
+    label: "Neubau oder Estrich trocknen",
+    title: "Belegreife prüfen. Den nächsten Schritt planen.",
+    description:
+      "Wir prüfen die Baufeuchte und die Belegreife des Estrichs. Das Trocknungsverfahren richtet sich nach Aufbau und Messung.",
+  },
+};
+let selectedSituation = "Unklar";
+const problemSelect = form.elements.problem;
+function updateRequestSummary() {
+  problemSelect.value = selectedSituation;
+  document.querySelector("#request-situation").textContent =
+    situations[selectedSituation].label;
+}
+function selectSituation(value) {
+  if (!situations[value]) return;
+  selectedSituation = value;
+  document
+    .querySelectorAll('[name="situation"]')
+    .forEach((radio) => (radio.checked = radio.value === value));
+  const situation = situations[value];
+  document.querySelector("#plan-title").textContent = situation.title;
+  document.querySelector("#plan-description").textContent =
+    situation.description;
+  document.querySelector("#plan-caution").hidden = value !== "Wasserschaden";
+  updateRequestSummary();
+  if (!reducedMotion.matches)
+    document.querySelector("#plan-copy").animate(
+      [
+        { opacity: 0.45, transform: "translateY(5px)" },
+        { opacity: 1, transform: "none" },
+      ],
+      { duration: 260, easing: "ease-out" },
+    );
+}
+document
+  .querySelectorAll('[name="situation"]')
+  .forEach((radio) =>
+    radio.addEventListener("change", () => selectSituation(radio.value)),
+  );
+problemSelect.addEventListener("change", () =>
+  selectSituation(problemSelect.value),
+);
+document.querySelector("#change-situation").addEventListener("click", () => {
+  const editor = document.querySelector("#situation-editor");
+  editor.hidden = !editor.hidden;
+  if (!editor.hidden) problemSelect.focus();
+});
+
+form.elements.phone.addEventListener("input", () =>
+  form.elements.phone.setCustomValidity(""),
+);
+form.elements.postcode.addEventListener("input", () =>
+  form.elements.postcode.setCustomValidity(""),
+);
+form.elements.postcode.addEventListener("invalid", () =>
+  form.elements.postcode.setCustomValidity(
+    "Bitte geben Sie die fünfstellige Postleitzahl des Einsatzortes ein.",
+  ),
+);
+
+form.elements.phone.addEventListener("invalid", () =>
+  form.elements.phone.setCustomValidity(
+    "Bitte geben Sie eine Telefonnummer mit mindestens sieben Ziffern ein.",
+  ),
+);
