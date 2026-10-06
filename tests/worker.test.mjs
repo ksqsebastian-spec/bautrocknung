@@ -200,7 +200,7 @@ test("expired records are removed and static resources have security headers", a
       .get("Content-Security-Policy")
       .includes("frame-ancestors 'none'"),
   );
-  assert.ok((await res.text()).includes("Wieder trocken."));
+  assert.ok((await res.text()).includes("Ihr Zuhause."));
   assert.equal(
     (await worker.fetch(new Request("https://example.invalid/secret"), env))
       .status,

@@ -5,13 +5,14 @@ const types = {
   ".js": "text/javascript;charset=utf-8",
   ".svg": "image/svg+xml",
   ".jpg": "image/jpeg",
+  ".ttf": "font/ttf",
 };
 const assets = {};
 for (const name of await readdir(new URL("../public/", import.meta.url))) {
   const ext = name.slice(name.lastIndexOf("."));
   if (!types[ext]) continue;
   const buffer = await readFile(new URL("../public/" + name, import.meta.url));
-  const binary = ext === ".jpg";
+  const binary = [".jpg", ".ttf"].includes(ext);
   assets["/" + name] = {
     type: types[ext],
     binary,

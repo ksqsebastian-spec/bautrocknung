@@ -6,6 +6,7 @@ const types = {
   js: "text/javascript",
   svg: "image/svg+xml",
   jpg: "image/jpeg",
+  ttf: "font/ttf",
 };
 createServer(async (req, res) => {
   let path = new URL(req.url, "http://localhost").pathname;

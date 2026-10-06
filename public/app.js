@@ -1,3 +1,4 @@
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const dialog = document.querySelector("#request-dialog");
 const form = document.querySelector("#request-form");
 let trigger = null,
@@ -12,20 +13,71 @@ const showStep = (step) => {
   document.querySelector("#step-label").textContent = `Schritt ${step} von 2`;
   document.querySelector("#progress-bar").style.width =
     step === 1 ? "50%" : "100%";
+  document.querySelectorAll("#contact-step input").forEach((input) => {
+    input.disabled = step !== 2;
+  });
+  const panel = document.querySelector(
+    step === 1 ? "#problem-step" : "#contact-step",
+  );
+  if (dialog.open && !reducedMotion.matches)
+    panel.animate(
+      [
+        { opacity: 0, transform: "translateY(12px)" },
+        { opacity: 1, transform: "none" },
+      ],
+      { duration: 350, easing: "ease-out" },
+    );
 };
 function openRequest(event) {
   trigger = event.currentTarget;
   document.querySelector("#request-flow").hidden = false;
   document.querySelector("#request-success").hidden = true;
   showStep(1);
+  closeMenu();
   dialog.showModal();
+  document.querySelector("#request-title").focus({ preventScroll: true });
+  if (!reducedMotion.matches)
+    dialog.animate(
+      [
+        {
+          opacity: 0,
+          transform:
+            innerWidth <= 650 ? "translateY(45px)" : "translateX(70px)",
+        },
+        { opacity: 1, transform: "translate(0)" },
+      ],
+      { duration: 480, easing: "cubic-bezier(.22,1,.36,1)" },
+    );
   document.body.classList.add("modal-open");
 }
-function closeRequest() {
+let closing = false;
+async function closeRequest() {
+  if (closing) return;
+  closing = true;
+  if (!reducedMotion.matches) {
+    await dialog
+      .animate(
+        [
+          { opacity: 1, transform: "translate(0)" },
+          {
+            opacity: 0,
+            transform:
+              innerWidth <= 650 ? "translateY(35px)" : "translateX(50px)",
+          },
+        ],
+        { duration: 200, easing: "ease-in" },
+      )
+      .finished.catch(() => {});
+  }
   dialog.close();
   document.body.classList.remove("modal-open");
   trigger?.focus();
+  closing = false;
 }
+dialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeRequest();
+});
 document
   .querySelectorAll("[data-request]")
   .forEach((el) => el.addEventListener("click", openRequest));
@@ -106,28 +158,127 @@ form.addEventListener("submit", async (e) => {
     error.scrollIntoView({ block: "nearest" });
   } finally {
     button.disabled = false;
-    button.innerHTML = 'Rückruf anfordern <span aria-hidden="true">↗</span>';
+    button.innerHTML =
+      'Rückruf anfordern <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>';
   }
 });
-const descriptions = [
-  "Den Bodenbelag erhalten wir nach Möglichkeit. Welcher Zugang geeignet ist, hängt vom Material und vom Aufbau ab.",
-  "Beim Estrich prüfen wir die Feuchte. Vor einem neuen Bodenbelag wird die Belegreife gemessen, nicht geschätzt.",
-  "Unter dem Estrich trocknet Feuchtigkeit kaum von allein. Über Randfugen oder Bohrungen erreichen wir die Dämmschicht gezielt.",
-];
-document.querySelectorAll("[data-floor]").forEach((button) =>
-  button.addEventListener("click", () => {
-    document
-      .querySelectorAll("[data-floor]")
-      .forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
-    document
-      .querySelectorAll("[data-layer]")
-      .forEach((layer) =>
-        layer.classList.toggle(
-          "active",
-          layer.dataset.layer === button.dataset.floor,
-        ),
-      );
-    document.querySelector("#layer-description").textContent =
-      descriptions[Number(button.dataset.floor)];
-  }),
+
+// Native page scrolling. Motion enhances the photographic composition; never delays contact.
+const header = document.querySelector("#site-header");
+const hero = document.querySelector(".hero");
+const heroFrame = document.querySelector("#hero-frame");
+const heroPicture = heroFrame?.querySelector("picture");
+const menu = document.querySelector("#menu-toggle");
+function closeMenu() {
+  header?.classList.remove("menu-open");
+  menu?.setAttribute("aria-expanded", "false");
+  menu?.setAttribute("aria-label", "Menü öffnen");
+}
+menu?.addEventListener("click", () => {
+  const open = menu.getAttribute("aria-expanded") !== "true";
+  header.classList.toggle("menu-open", open);
+  menu.setAttribute("aria-expanded", String(open));
+  menu.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+});
+document
+  .querySelectorAll("#main-nav a")
+  .forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && header?.classList.contains("menu-open")) {
+    closeMenu();
+    menu.focus();
+  }
+});
+let framePending = false;
+function updateScene() {
+  if (!hero || !header || !heroFrame || !heroPicture) {
+    framePending = false;
+    return;
+  }
+  const height = hero.offsetHeight;
+  header.classList.toggle("solid", scrollY > height - 105);
+  if (reducedMotion.matches) {
+    heroFrame.style.clipPath = "";
+    heroPicture.style.transform = "";
+  } else {
+    const phase = Math.min(scrollY / (height * 0.7), 1);
+    const inset = phase * (innerWidth <= 650 ? 10 : 28);
+    heroFrame.style.clipPath = `inset(0 ${inset}px round ${phase * 16}px)`;
+    heroPicture.style.transform = `translateY(${Math.min(scrollY, height) * 0.16}px)`;
+  }
+  framePending = false;
+}
+function requestScene() {
+  if (!framePending) {
+    framePending = true;
+    requestAnimationFrame(updateScene);
+  }
+}
+addEventListener("scroll", requestScene, { passive: true });
+addEventListener("resize", requestScene);
+reducedMotion.addEventListener("change", () => {
+  updateScene();
+  if (reducedMotion.matches)
+    document.querySelectorAll(".reveal-pending").forEach((el) => {
+      el.classList.remove("reveal-pending");
+      el.classList.add("is-visible");
+    });
+});
+updateScene();
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        entry.target.classList.remove("reveal-pending");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.08, rootMargin: "0px 0px -35px 0px" },
 );
+document.querySelectorAll("[data-reveal]").forEach((el) => {
+  if (!reducedMotion.matches && el.getBoundingClientRect().top > innerHeight)
+    el.classList.add("reveal-pending");
+  revealObserver.observe(el);
+});
+const mobileBar = document.querySelector("#mobile-bar");
+const contactObserver = new IntersectionObserver((entries) => {
+  const entry = entries[0];
+  mobileBar?.classList.toggle(
+    "visible",
+    !entry.isIntersecting && entry.boundingClientRect.top < 0,
+  );
+});
+const heroRequest = document.querySelector("#hero-request");
+if (heroRequest) contactObserver.observe(heroRequest);
+// Animate native details while preserving keyboard operation and the static fallback.
+document.querySelectorAll(".faq details").forEach((details) => {
+  const summary = details.querySelector("summary"),
+    answer = details.querySelector(".faq-answer");
+  let animation;
+  summary.addEventListener("click", (event) => {
+    if (reducedMotion.matches) return;
+    event.preventDefault();
+    if (animation) return;
+    const wasOpen = details.open;
+    if (!wasOpen) details.open = true;
+    const height = answer.scrollHeight;
+    animation = answer.animate(
+      wasOpen
+        ? [
+            { height: `${height}px`, opacity: 1 },
+            { height: "0px", opacity: 0 },
+          ]
+        : [
+            { height: "0px", opacity: 0 },
+            { height: `${height}px`, opacity: 1 },
+          ],
+      { duration: 300, easing: "cubic-bezier(.22,1,.36,1)" },
+    );
+    animation.onfinish = () => {
+      if (wasOpen) details.open = false;
+      animation = null;
+    };
+  });
+});

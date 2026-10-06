@@ -3,433 +3,363 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#f4f5f2" />
+    <meta name="theme-color" content="#232722" />
     <meta name="robots" content="noindex,nofollow" />
     <meta
       name="description"
-      content="Bautrocknung in Hamburg: Feuchtemessung, technische Trocknung und Wiederherstellung aus einer Hand. Hantke Meisterbetrieb seit 2002."
+      content="Bautrocknung und Wiederherstellung in Hamburg. Feuchte messen, gezielt trocknen, Räume wiederherstellen. Hantke Meisterbetrieb seit 2002."
     />
-    <title>Hantke Bautrocknung — Wieder trocken. Wieder zuhause.</title>
+    <title>Hantke Bautrocknung — Ihr Zuhause. Wieder in Ruhe.</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/instrument-serif.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="stylesheet" href="/style.css" />
     <script src="/app.js" defer></script>
   </head>
-  <body>
+  <body class="landing">
     <a class="skip" href="#main">Zum Inhalt</a>
-    <header class="header wrap">
+    <header class="site-header" id="site-header">
       <a class="brand" href="/" aria-label="Hantke Bautrocknung Startseite"
-        >HANTKE<span>.</span><small>BAUTROCKNUNG</small></a
+        >Hantke.</a
       >
-      <nav aria-label="Hauptnavigation">
+      <nav id="main-nav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a><a href="#ablauf">Ablauf</a
         ><a href="#fragen">Fragen</a>
       </nav>
       <div class="header-actions">
-        <a class="header-phone" href="tel:+491783570038">0178 357 00 38</a
-        ><button class="button small" data-request>
-          Rückruf anfordern <span aria-hidden="true">↗</span>
+        <a class="mobile-phone" href="tel:+491783570038">Anrufen</a
+        ><button class="button light small header-cta" data-request>
+          Hilfe anfordern</button
+        ><button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span></span><span></span>
         </button>
       </div>
     </header>
     <main id="main">
-      <section class="hero wrap">
-        <div class="hero-copy">
-          <h1>Wieder trocken.<br /><em>Wieder zuhause.</em></h1>
-          <p class="intro">
-            Bautrocknung in Hamburg. Wir messen, trocknen und stellen wieder
-            her. Mit einem Ansprechpartner für alles.
-          </p>
-          <div class="hero-actions">
-            <button class="button" data-request>
-              Rückruf anfordern <span aria-hidden="true">↗</span></button
-            ><a class="text-link" href="tel:+491783570038"
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="m7 3 3 5-2 2c1 3 3 5 6 6l2-2 5 3c0 3-2 5-5 4C9 19 5 15 3 8c-1-3 1-5 4-5Z"
-                /></svg
-              >Lieber direkt anrufen</a
-            >
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-frame" id="hero-frame">
+          <picture
+            ><source media="(max-width:650px)" srcset="/interior-mobile.jpg" />
+            <img
+              class="hero-photo"
+              src="/interior-v2.jpg"
+              width="1800"
+              height="1200"
+              alt="Lichtdurchfluteter Wohnraum mit natürlichen Materialien — Architekturaufnahme, Symbolbild"
+              fetchpriority="high"
+          /></picture>
+          <div class="hero-shade"></div>
+          <div class="hero-copy">
+            <h1 id="hero-title">
+              <span>Ihr Zuhause.</span><span>Wieder in Ruhe.</span>
+            </h1>
+            <p>Bautrocknung und Wiederherstellung in Hamburg.</p>
+            <div class="hero-actions">
+              <button class="button light" data-request id="hero-request">
+                Hilfe anfordern
+                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 12h15m-6-6 6 6-6 6" />
+                </svg></button
+              ><a class="phone-link" href="tel:+491783570038">0178 357 00 38</a>
+            </div>
           </div>
-          <p class="micro">
-            Werktags erreichbar · Angebot kostenlos & unverbindlich
-          </p>
-          <div class="location">
-            <span aria-hidden="true">↗</span> Hamburg West & Nord
-          </div>
+          <p class="image-caption">Architekturaufnahme · Symbolbild</p>
+          <a
+            class="scroll-cue"
+            href="#leistungen"
+            aria-label="Leistungen entdecken"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4v15m-6-6 6 6 6-6" /></svg
+          ></a>
         </div>
-        <figure class="hero-image">
-          <img
-            src="/hero.jpg"
-            srcset="/hero-small.jpg 800w, /hero.jpg 1600w"
-            sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 1200px) 45vw, 650px"
-            width="1600"
-            height="1200"
-            alt="Heller Wohnraum mit Tageslicht, Holz und Pflanzen — Symbolbild"
-            fetchpriority="high"
-          />
-          <figcaption>
-            <span>Das Ziel ist nicht nur trocken.</span
-            ><strong>Es ist wieder<br /><em>Ihr Zuhause.</em></strong
-            ><small>Symbolbild</small>
-          </figcaption>
-          <div class="photo-line" aria-hidden="true"></div>
-        </figure>
       </section>
-      <div class="proof wrap">
-        <div>
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path
-              d="m20 4-5 5 2 5 5 2 5-5c2 7-4 12-10 9L7 29l-4-4 9-10C9 9 14 3 20 4Z"
-            />
-          </svg>
-          <p>
-            <strong>Meisterbetrieb seit 2002</strong
-            ><span>Handwerk mit Verantwortung.</span>
-          </p>
+      <section id="leistungen" class="services section">
+        <div class="wrap">
+          <p class="section-index">01 / Leistungen</p>
+          <div class="service-intro" data-reveal>
+            <h2>Trocken ist erst der Anfang.</h2>
+            <p>
+              Von der ersten Messung bis zum letzten Anstrich.<br
+                class="desktop-break"
+              />
+              Ein Meisterbetrieb, der den ganzen Weg übernimmt.
+            </p>
+          </div>
+          <div class="service-grid">
+            <figure class="service-image" data-reveal>
+              <picture
+                ><source
+                  media="(max-width:650px)"
+                  srcset="/detail-mobile.jpg" />
+                <img
+                  src="/detail-v2.jpg"
+                  width="1400"
+                  height="933"
+                  loading="lazy"
+                  alt="Wohnraum mit Holz, Putz und großem Fenster — Symbolbild"
+              /></picture>
+              <figcaption>
+                Architekturaufnahme
+                <span>· Symbolbild</span>
+              </figcaption>
+            </figure>
+            <div class="service-list">
+              <article data-reveal>
+                <h3>Wände & Decken</h3>
+                <p>
+                  Feuchte messen und gezielt trocknen. Bei Wasserschäden,
+                  feuchten Wänden und Baufeuchte im Neubau.
+                </p>
+              </article>
+              <article data-reveal>
+                <h3>Estrich & Dämmschicht</h3>
+                <p>
+                  Wir prüfen den Bodenaufbau und wählen das passende Verfahren.
+                  Die Belegreife wird gemessen, nicht geschätzt.
+                </p>
+              </article>
+              <article data-reveal>
+                <h3>Putz & Anstrich</h3>
+                <p>
+                  Nach der Trocknung übernehmen wir auch Putz, Spachtel und
+                  Anstrich. Ein Ansprechpartner bis zur fertigen Wand.
+                </p>
+              </article>
+            </div>
+          </div>
+          <div class="credentials">
+            <p>Meisterbetrieb seit 2002</p>
+            <p>Eigene Trocknungsgeräte</p>
+            <p>Messprotokoll & Trocknungsbericht</p>
+          </div>
         </div>
-        <div>
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect x="7" y="3" width="19" height="26" rx="3" />
-            <path d="M12 10h9M12 16h9M12 22h5" />
-          </svg>
-          <p>
-            <strong>Gemessen. Dokumentiert.</strong
-            ><span>Messprotokoll und Trocknungsbericht.</span>
-          </p>
-        </div>
-        <div>
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path d="m3 15 13-11 13 11M6 13v15h20V13M13 28v-9h6v9" />
-          </svg>
-          <p>
-            <strong>Bis zur fertigen Wand</strong
-            ><span>Trocknung und Wiederherstellung.</span>
-          </p>
-        </div>
-      </div>
+      </section>
       <section id="ablauf" class="process section">
         <div class="wrap">
-          <div class="section-title">
-            <span class="label">SO EINFACH GEHT’S</span>
-            <h2>
-              Sie müssen kein Experte sein.<br /><em
-                >Sie brauchen nur einen.</em
-              >
-            </h2>
+          <p class="section-index">02 / Unser Ablauf</p>
+          <div class="process-intro">
+            <h2 data-reveal>Ein Anruf.<br />Ein klarer Plan.</h2>
+            <p data-reveal>
+              Sie müssen kein Trocknungsexperte sein. Wir klären, was nötig ist
+              — und was es kostet.
+            </p>
           </div>
           <div class="steps">
-            <article>
+            <article data-reveal>
               <span class="step-num">01</span>
-              <h3>Erst einmal Klarheit.</h3>
+              <h3>Persönlich klären</h3>
               <p>
-                Wir klären am Telefon, was passiert ist, und stimmen den
-                Ortstermin ab. Was die Messung kostet, erfahren Sie vorab.
+                Sie schildern kurz die Situation. Wir stimmen den Ortstermin ab
+                und klären die Kosten der Besichtigung vorher am Telefon.
               </p>
             </article>
-            <article>
+            <article data-reveal>
               <span class="step-num">02</span>
-              <h3>Ein Plan. Ein Team.</h3>
+              <h3>Gezielt trocknen</h3>
               <p>
-                Feuchte messen, Kosten schriftlich klären, Geräte aufbauen. Wir
-                kontrollieren und dokumentieren den Fortschritt.
+                Nach der Messung erhalten Sie einen schriftlichen Kostenrahmen.
+                Wir bauen die Geräte auf und kontrollieren den Fortschritt alle
+                zwei bis drei Tage.
               </p>
             </article>
-            <article>
+            <article data-reveal>
               <span class="step-num">03</span>
-              <h3>Zurück zum Alltag.</h3>
+              <h3>Sauber abschließen</h3>
               <p>
-                Nach der Abschlussmessung kümmern wir uns auch um Putz, Spachtel
-                und Anstrich. Sie brauchen keine zweite Firma.
+                Eine Abschlussmessung dokumentiert das Ergebnis. Auf Wunsch
+                stellen wir auch die Oberflächen wieder her — bis zum letzten
+                Anstrich.
               </p>
             </article>
           </div>
+          <div class="process-action" data-reveal>
+            <button class="button" data-request>
+              Rückruf anfordern
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h15m-6-6 6 6-6 6" />
+              </svg>
+            </button>
+            <p>Kein Konto. Kein langer Schadensbericht.</p>
+          </div>
         </div>
       </section>
-      <section id="leistungen" class="tech section">
-        <div class="wrap tech-grid">
-          <div class="tech-copy">
-            <span class="label">TECHNIK, DIE TIEFER GEHT</span>
-            <h2>Auch das<br /><em>Unsichtbare</em><br />wird trocken.</h2>
-            <p>
-              Eine Wand kann trocken aussehen, während darunter noch
-              Feuchtigkeit sitzt. Wir prüfen den Aufbau und wählen das passende
-              Verfahren.
-            </p>
-            <a class="quiet-link" href="#kosten"
-              >Wie wir den Aufwand klären <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="tech-display">
-            <svg
-              class="floor"
-              viewBox="0 0 600 470"
-              role="img"
-              aria-labelledby="floor-title floor-desc"
-            >
-              <title id="floor-title">
-                Schematischer Bodenaufbau mit vier Schichten
-              </title>
-              <desc id="floor-desc">
-                Belag, Estrich, Dämmschicht und Rohdecke. Die feuchte
-                Dämmschicht wird über Randfugen oder Bohrungen getrocknet.
-              </desc>
-              <defs>
-                <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
-                  <stop stop-color="#8da59c" stop-opacity=".7" />
-                  <stop offset="1" stop-color="#203e35" />
-                </linearGradient>
-                <linearGradient id="wet">
-                  <stop stop-color="#65d1b8" stop-opacity=".3" />
-                  <stop offset="1" stop-color="#a9ffe2" stop-opacity=".8" />
-                </linearGradient>
-                <pattern
-                  id="grain"
-                  width="20"
-                  height="20"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <path d="M0 20 20 0" stroke="#adc8ba" stroke-opacity=".12" />
-                </pattern>
-              </defs>
-              <g class="layer" data-layer="3">
-                <path
-                  d="m65 298 215-100 250 110-218 117Z"
-                  fill="#2b4239"
-                  stroke="#839a8d"
-                />
-                <path
-                  d="m65 298 247 127v28L65 328Z"
-                  fill="#22362d"
-                  stroke="#73877b"
-                />
-                <path
-                  d="m312 425 218-117v30L312 453Z"
-                  fill="#16291f"
-                  stroke="#73877b"
-                />
-              </g>
-              <g class="layer active" data-layer="2">
-                <path
-                  d="m65 236 215-100 250 110-218 117Z"
-                  fill="url(#wet)"
-                  stroke="#82e4c8"
-                />
-                <path
-                  d="m65 236 247 127v22L65 258Z"
-                  fill="#3e8f7c"
-                  fill-opacity=".6"
-                  stroke="#82e4c8"
-                />
-                <path
-                  d="m312 363 218-117v22L312 385Z"
-                  fill="#246353"
-                  fill-opacity=".7"
-                  stroke="#82e4c8"
-                />
-                <g fill="#9ff0d5" opacity=".75">
-                  <circle cx="215" cy="241" r="3" />
-                  <circle cx="270" cy="218" r="4" />
-                  <circle cx="321" cy="254" r="3" />
-                  <circle cx="346" cy="295" r="4" />
-                  <circle cx="385" cy="243" r="3" />
-                </g>
-              </g>
-              <g class="layer" data-layer="1">
-                <path
-                  d="m65 184 215-100 250 110-218 117Z"
-                  fill="#4e675a"
-                  fill-opacity=".8"
-                  stroke="#a9b8ab"
-                />
-                <path
-                  d="m65 184 247 127v20L65 204Z"
-                  fill="#536b5d"
-                  stroke="#a9b8ab"
-                />
-                <path
-                  d="m312 311 218-117v20L312 331Z"
-                  fill="#304639"
-                  stroke="#a9b8ab"
-                />
-              </g>
-              <g class="layer" data-layer="0">
-                <path
-                  d="m65 135 215-100 250 110-218 117Z"
-                  fill="url(#top)"
-                  stroke="#b2c6b9"
-                />
-                <path d="m65 135 215-100 250 110-218 117Z" fill="url(#grain)" />
-                <path
-                  d="m65 135 247 127v9L65 144Z"
-                  fill="#61766b"
-                  stroke="#9aad9e"
-                />
-                <path
-                  d="m312 262 218-117v9L312 271Z"
-                  fill="#3b5044"
-                  stroke="#9aad9e"
-                />
-              </g>
-              <g class="airflow" stroke="#9effdc" stroke-width="2" fill="none">
-                <path d="M217 260c-40-55 27-85 0-135s0-50 0-85" />
-                <path d="m210 52 7-12 7 12" />
-                <path d="M348 285c-38-45 26-75 0-120s0-40 0-72" />
-                <path d="m341 105 7-12 7 12" />
-              </g>
-            </svg>
-            <div
-              class="layer-controls"
-              role="group"
-              aria-label="Bodenschicht erklären"
-            >
-              <button data-floor="0" aria-pressed="false">Belag</button
-              ><button data-floor="1" aria-pressed="false">Estrich</button
-              ><button data-floor="2" aria-pressed="true">Dämmschicht</button>
+      <section id="fragen" class="questions section wrap">
+        <div data-reveal>
+          <p class="section-index">03 / Ihre Fragen</p>
+          <h2>Gut zu wissen.</h2>
+          <p class="faq-intro">
+            Klare Antworten.<br />Bevor Sie sich entscheiden.
+          </p>
+        </div>
+        <div class="faq" data-reveal>
+          <details open>
+            <summary>
+              Was kostet die Bautrocknung?<svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5v14" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Vor dem Einsatz erhalten Sie einen schriftlichen Kostenrahmen.
+                Gerätezahl, Laufzeit und Arbeitsaufwand richten sich nach dem
+                Schaden. Das Angebot ist kostenlos und unverbindlich; die Kosten
+                einer Besichtigung klären wir vorher telefonisch.
+              </p>
             </div>
-            <p
-              class="layer-description"
-              id="layer-description"
-              aria-live="polite"
-            >
-              Unter dem Estrich trocknet Feuchtigkeit kaum von allein. Über
-              Randfugen oder Bohrungen erreichen wir die Dämmschicht gezielt.
-            </p>
-            <small
-              >Schematische Darstellung · Verfahren nach Prüfung vor Ort</small
-            >
-          </div>
-        </div>
-        <div class="wrap service-row">
-          <span>Wand & Decke</span><span>Estrich & Dämmschicht</span
-          ><span>Neubau & Baufeuchte</span
-          ><span>Putz, Spachtel & Anstrich</span>
-        </div>
-      </section>
-      <section id="kosten" class="costs section wrap">
-        <div class="cost-copy">
-          <span class="label">GUT ZU WISSEN</span>
-          <h2>Erst Klarheit.<br /><em>Dann Kosten.</em></h2>
-          <p>
-            Gute Arbeit beginnt mit einem klaren Angebot. Sie bekommen den
-            Kostenrahmen schriftlich, bevor wir Geräte aufbauen.
-          </p>
-          <p class="cost-detail">
-            Gerätezahl, Laufzeit und Arbeitsaufwand richten sich nach Ihrem
-            Schaden. Die Sätze stehen im Angebot. Das Angebot ist kostenlos; den
-            Preis für den Ortstermin klären wir vorab.
-          </p>
-          <button class="text-link" data-request>
-            Situation besprechen <span aria-hidden="true">↗</span>
-          </button>
-        </div>
-        <div id="fragen" class="faq">
-          <details>
-            <summary>
-              Wie lange dauert eine Trocknung?<span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              Bei Oberflächen- und Raumtrocknung meist 1–3 Wochen, bei
-              Dämmschichttrocknung eher 2–4 Wochen. Aufbau und Durchfeuchtung
-              entscheiden. Nach der ersten Messung können wir den Zeitraum
-              besser einschätzen.
-            </p>
           </details>
           <details>
             <summary>
-              Was bekommt meine Versicherung?<span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              Sie erhalten Messprotokoll und Trocknungsbericht. Ob und welche
-              Kosten übernommen werden, hängt von Ihrem Vertrag und dem Schaden
-              ab. Die Abrechnung besprechen wir im Ortstermin.
-            </p>
-          </details>
-          <details>
-            <summary>
-              Kann ich in meiner Wohnung bleiben?<span aria-hidden="true"
-                >+</span
+              Wie lange dauert die Trocknung?<svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
               >
+                <path d="M5 12h14M12 5v14" />
+              </svg>
             </summary>
-            <p>
-              Das ist häufig möglich und wird vor Ort beurteilt. Die Geräte
-              verursachen Wärme und Geräusche und müssen nach dem vereinbarten
-              Trocknungsplan laufen. Laufzeiten in Schlafräumen stimmen wir mit
-              Ihnen ab.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Oberflächen- und Raumtrocknung dauert meist 1–3 Wochen,
+                Dämmschichttrocknung eher 2–4 Wochen. Aufbau und Durchfeuchtung
+                entscheiden. Nach der ersten Messung können wir den Zeitraum
+                besser einschätzen.
+              </p>
+            </div>
           </details>
           <details>
             <summary>
-              Helfen Sie auch ohne Wasserschaden?<span aria-hidden="true"
-                >+</span
+              Zahlt meine Versicherung?<svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
               >
+                <path d="M5 12h14M12 5v14" />
+              </svg>
             </summary>
-            <p>
-              Ja. Im Neubau trocknen wir Baufeuchte aus Putz, Estrich und
-              Mauerwerk. Für Bodenbeläge wird die Belegreife gemessen. Auch bei
-              feuchten Wänden prüfen wir zuerst die Situation.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Sie erhalten Messprotokoll und Trocknungsbericht. Ob und welche
+                Kosten Ihre Versicherung übernimmt, hängt vom Vertrag und vom
+                Schaden ab. Die Abrechnung besprechen wir beim Ortstermin.
+              </p>
+            </div>
           </details>
           <details>
             <summary>
-              Wo sind Sie unterwegs?<span aria-hidden="true">+</span>
+              Kann ich zuhause bleiben?<svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5v14" />
+              </svg>
             </summary>
-            <p>
-              Unser Schwerpunkt liegt in Hamburg West und Nord. Geben Sie Ihre
-              Postleitzahl an oder rufen Sie uns an. Wir klären, ob wir Ihnen
-              vor Ort helfen können.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Das ist häufig möglich und wird vor Ort beurteilt. Die Geräte
+                verursachen Wärme und Geräusche und müssen nach dem vereinbarten
+                Trocknungsplan laufen. Laufzeiten in Schlafräumen stimmen wir
+                mit Ihnen ab.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              Wo sind Sie im Einsatz?<svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5v14" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Unser Schwerpunkt liegt in Hamburg West und Nord. Geben Sie Ihre
+                Postleitzahl an oder rufen Sie uns an. Wir klären persönlich, ob
+                wir vor Ort helfen können. Telefonisch sind wir werktags
+                erreichbar.
+              </p>
+            </div>
           </details>
         </div>
       </section>
-      <section class="closing wrap">
-        <h2>
-          Ein Anruf weniger Sorge.<br /><em>Ein klarer nächster Schritt.</em>
-        </h2>
-        <div>
-          <button class="button" data-request>
-            Rückruf anfordern <span aria-hidden="true">↗</span></button
-          ><a href="tel:+491783570038">0178 357 00 38</a>
-          <p class="micro">Kein Konto. Kein langer Schadensbericht.</p>
+      <section class="closing" aria-labelledby="closing-title">
+        <picture
+          ><source media="(max-width:650px)" srcset="/detail-mobile.jpg" />
+          <img
+            src="/detail-v2.jpg"
+            width="1400"
+            height="933"
+            loading="lazy"
+            alt="Heller Wohnraum — Architekturaufnahme, Symbolbild"
+        /></picture>
+        <div class="closing-shade"></div>
+        <div class="closing-copy" data-reveal>
+          <h2 id="closing-title">Der erste Schritt ist einfach.</h2>
+          <button class="button light" data-request>
+            Hilfe anfordern
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12h15m-6-6 6 6-6 6" />
+            </svg></button
+          ><a class="phone-link" href="tel:+491783570038"
+            >0178 357 00 38 · werktags</a
+          >
         </div>
+        <p class="image-caption">Architekturaufnahme · Symbolbild</p>
       </section>
     </main>
     <footer class="footer wrap">
-      <div>
-        <a class="brand" href="/"
-          >HANTKE<span>.</span><small>BAUTROCKNUNG</small></a
+      <div class="footer-top">
+        <a class="brand" href="/">Hantke.</a>
+        <p>Meisterbetrieb seit 2002.<br />Hamburg West & Nord.</p>
+        <div class="footer-links">
+          <a
+            href="https://www.maler-hantke.de/impressum"
+            target="_blank"
+            rel="noopener"
+            >Impressum</a
+          ><a href="/datenschutz">Datenschutz</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Tomas Hantke Malermeister GmbH · Bötelkamp 31 · 22529 Hamburg</p>
+        <p>Designvorschau · Anfragen an das Projektteam</p>
+        <a href="https://unsplash.com/" target="_blank" rel="noopener"
+          >Architekturaufnahmen: Unsplash</a
         >
-        <p>Tomas Hantke Malermeister GmbH<br />Bötelkamp 31 · 22529 Hamburg</p>
       </div>
-      <div class="footer-links">
-        <a
-          href="https://www.maler-hantke.de/impressum"
-          target="_blank"
-          rel="noopener"
-          >Impressum ↗</a
-        ><a href="/datenschutz">Datenschutz dieser Vorschau</a
-        ><a href="https://unsplash.com/" target="_blank" rel="noopener"
-          >Foto: Unsplash ↗</a
-        ><span>Designvorschau · Anfragen an das Projektteam</span>
-      </div>
-      <p class="footer-note">
-        Hamburger Handwerk.<br />Eine trockene Perspektive.
-      </p>
     </footer>
-    <div class="mobile-bar">
+    <div class="mobile-bar" id="mobile-bar">
       <a href="tel:+491783570038">Anrufen</a
       ><button class="button" data-request>
-        Rückruf anfordern <span aria-hidden="true">↗</span>
+        Hilfe anfordern
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 12h15m-6-6 6 6-6 6" />
+        </svg>
       </button>
     </div>
     <dialog id="request-dialog" aria-labelledby="request-title">
       <div class="dialog-top">
-        <a class="brand" href="/">HANTKE<span>.</span></a
+        <a class="brand" href="/">Hantke.</a
         ><button
           class="icon-button"
           id="close-dialog"
           aria-label="Anfrage schließen"
         >
-          ×
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 6 12 12M6 18 18 6" />
+          </svg>
         </button>
       </div>
       <div id="request-flow">
@@ -439,7 +369,7 @@
         </div>
         <form id="request-form">
           <section id="problem-step">
-            <h2 id="request-title">Was ist passiert?</h2>
+            <h2 id="request-title" tabindex="-1">Was ist passiert?</h2>
             <p>Ein Stichwort reicht. Den Rest klären wir am Telefon.</p>
             <fieldset class="problem-options">
               <legend class="sr-only">Situation auswählen</legend>
@@ -452,26 +382,28 @@
                 /><span
                   >Wasserschaden
                   <small>Zum Beispiel Rohrbruch oder Waschmaschine</small></span
-                ><b aria-hidden="true">↗</b></label
+                ></label
               ><label
                 ><input type="radio" name="problem" value="Feuchte Wand" /><span
                   >Feuchte Wand oder Boden</span
-                ><b aria-hidden="true">↗</b></label
+                ></label
               ><label
                 ><input
                   type="radio"
                   name="problem"
                   value="Neubau / Estrich"
-                /><span>Neubau oder Estrich trocknen</span
-                ><b aria-hidden="true">↗</b></label
+                /><span>Neubau oder Estrich trocknen</span></label
               ><label
                 ><input type="radio" name="problem" value="Unklar" /><span
                   >Ich bin mir nicht sicher</span
-                ><b aria-hidden="true">↗</b></label
+                ></label
               >
             </fieldset>
             <button type="button" id="next-step" class="button full">
-              Weiter <span aria-hidden="true">→</span>
+              Weiter
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h15m-6-6 6 6-6 6" />
+              </svg>
             </button>
           </section>
           <section id="contact-step" hidden>
@@ -522,7 +454,10 @@
             </p>
             <p id="form-error" role="alert" hidden></p>
             <button type="submit" class="button full" id="submit-request">
-              Rückruf anfordern <span aria-hidden="true">↗</span>
+              Rückruf anfordern
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h15m-6-6 6 6-6 6" />
+              </svg>
             </button>
             <p class="micro">
               Anfrage unverbindlich · Termin wird persönlich abgestimmt

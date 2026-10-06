@@ -46,6 +46,6 @@ The D1 schema is in `schema.sql`.
 
 ## Research and editorial boundaries
 
-See DESIGN.md for actual Mobbin references, source facts, rejected patterns and the value equation. The concept image is a local layout reference only and is not served on the website. The site uses a real Unsplash interior photo as a labelled symbol image, and an original code-native explanatory diagram. No generated people, synthetic project photos, fake ratings or fake availability.
+See DESIGN.md for actual Mobbin references, source facts, rejected patterns and the value equation. The concept image is a local layout reference only and is not served on the website. The current Cover-inspired version uses two real Unsplash architectural photographs as labelled symbol images. It has a full-screen photographic opening, self-hosted Instrument Serif and DM Sans, native scroll parallax and framing, finite entry motion, section reveals, animated FAQs and an accessible enquiry drawer. Reduced-motion preferences suppress animations. See QA.md for the concept comparison and live checks. No generated people, synthetic project photos, fake ratings or fake availability.
 
 This is a noindex design preview. Brand/service facts come from the Hantke source page, while form submissions go to the user's project inbox. The form and privacy page disclose that distinction. Review the operator's legal details before turning the preview into the business's production site.

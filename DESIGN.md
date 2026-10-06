@@ -43,6 +43,44 @@ Effort/sacrifice: no account, no provider comparison, no long damage report, no 
 
 No guarantee of zero friction or conversion performance is made. Mobile usability and the submission/read-back path must be verified.
 
-## Visual system
+## Current direction: Cover-inspired redesign
 
-Warm light gray #f4f5f2, forest ink #142520, burnt orange #c84929 (white-label contrast 4.73:1), mint technical accents. Oversized sans headlines with one editorial italic serif line, 18px+ body text, ample spacing, rounded image framing. Real interior photograph as an explicitly illustrative image; no fake employees or project evidence. Original SVG floor diagram. Minimal animation, reduced-motion support. A real request form, not a fictional appointment calendar.
+The user rejected the original orange/forest/SVG design and explicitly chose Cover. The current production design follows Cover's full-screen architectural presentation and sparse editorial layout, with real images and a straightforward service action. Earlier references above are research history, not the current aesthetic.
+
+Primary live reference: https://buildcover.com/ — inspected on desktop and mobile, including its opening, architecture detail sections and enquiry pattern. Additional affluent-US references and captured evidence are in `../research/LUXURY-REFERENCES.md`.
+
+Actual successful Mobbin section searches on 2026-10-06, previews visually inspected:
+
+- Rivian cinematic opening: https://mobbin.com/sites/sections/facc6157-46bc-426a-b6a3-7cd1eab98d6d — immersive image, minimal overlaid controls.
+- Rivian sunset opening: https://mobbin.com/sites/sections/1d38221a-d507-4087-a879-6249a946af94 — sparse headline and direct action.
+- Rivian R1S: https://mobbin.com/sites/sections/542092f3-a589-4909-8f3f-630089abe4f0 — large product photography and deliberate scale.
+- In Common With workshop: https://mobbin.com/sites/sections/5f24a8f8-e6b5-4008-872e-e3d7ab369c55 — material photography and editorial explanation.
+- In Common With interior: https://mobbin.com/sites/sections/a87f2a50-8a78-4193-b491-5589059041fa — full architectural frame and quiet type.
+- In Common With FAQ: https://mobbin.com/sites/sections/40b53245-94f5-4f33-aa44-39490dc2fb31 — restrained ruled questions.
+
+These references were returned by the Mobbin plugin. Cover was inspected directly; no claim is made that Mobbin returned Cover. No reference screenshots or proprietary assets are used as website assets.
+
+## Tokens and composition
+
+White #ffffff, charcoal #232722, stone #f1f0eb, muted text #60635e and thin rules #d7d9d3. Self-hosted Instrument Serif regular for all editorial headings; DM Sans regular for readable content and controls. Desktop 56px side margins, mobile 20–24px. Main section spacing 110px desktop / 68px mobile. Pill contact actions; no decorative card grids or badges.
+
+Hero: full-screen real interior photograph, neutral top/bottom contrast gradient, transparent navigation, two-line headline “Ihr Zuhause. Wieder in Ruhe.”, explicit service/location, primary “Hilfe anfordern”, phone alternative. Architectural images are labelled Symbolbild.
+
+Downstream: services with a large interior image and three open descriptions; measured three-stage process on stone; ruled FAQ; full-image closing action; factual footer. Mobile stacks content, keeps direct calling visible and reveals a compact contact bar after the opening help action scrolls out of view.
+
+## Motion
+
+Finite 4-second image settling and staggered entry, native-scroll photographic parallax and rounded framing, header contrast transition, one-time section reveals and ruled-step reveals, animated native details, a 480ms enquiry drawer entry / 200ms dismissal and 350ms form-step transitions. No scroll hijacking, looping media, loading ceremony or fake video controls. All motion respects prefers-reduced-motion; content is visible if script enhancement fails.
+
+## Concept prompt set
+
+Built-in Image Gen was used for layout mockups only, before implementation. Saved four separate concepts in `../research/cover-concepts/`: hero.png, services.png, process.png and faq.png. No generated raster is served by the website.
+
+Shared prompt: premium California architecture like Cover, German Hantke Bautrocknung, Instrument Serif headings / DM Sans 18px UI, white-charcoal-stone, readable for age30–60, code-native controls, supplied unmodified real photo, no invented ratings, guarantees, badges, orange buttons or diagrams.
+
+Hero prompt: full-bleed supplied interior, minimal transparent Hantke / Leistungen / Ablauf / Fragen / Hilfe anfordern header; lower-left exact headline and service line; white pill help action and phone; Symbolbild caption.
+Services prompt: “Trocken ist erst der Anfang.” centered with short one-team explanation; large real interior beside open ruled Wände & Decken / Estrich & Dämmschicht / Putz & Anstrich descriptions.
+Process prompt: stone surface, “Ein Anruf. Ein klarer Plan.” left, explanation right; three open numbered steps Persönlich klären / Gezielt trocknen / Sauber abschließen; dark callback action.
+FAQ prompt: “Gut zu wissen.” left, ruled questions right; photographic closing “Der erste Schritt ist einfach.” with white help action and factual footer.
+
+Generated explanatory text was replaced with verified service wording wherever it invented guarantees, cost certainty or health claims. The generated process font drifted from the requested typography; implementation consistently uses the specified Instrument Serif across all sections.
