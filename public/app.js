@@ -116,8 +116,8 @@ form.addEventListener("submit", async (e) => {
     dialog.setAttribute("aria-labelledby", "success-title");
     document.querySelector("#reference").textContent = result.reference;
     document.querySelector("#success-message").textContent = result.notified
-      ? "Ihre Anfrage wurde per E-Mail an das Projektteam weitergeleitet. So geht es weiter:"
-      : "Ihre Anfrage ist sicher gespeichert. Die E-Mail-Zustellung wird erneut versucht. Das Projektteam kann Ihre Anfrage auch im geschützten Posteingang sehen.";
+      ? "Wir rufen binnen 2 Geschäftsstunden zurück."
+      : "Anfrage gespeichert. Die E-Mail-Zustellung wird erneut versucht.";
     document.querySelector("#success-close").focus();
     form.reset();
     requestId = crypto.randomUUID();
@@ -268,53 +268,27 @@ document.querySelectorAll(".faq details").forEach((details) => {
   });
 });
 
-// A short technical explanation, never a simulated measurement or live dashboard.
-document.querySelectorAll("[data-method]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const selected = button.dataset.method;
-    const willOpen = button.getAttribute("aria-expanded") !== "true";
-    document.querySelectorAll("[data-method]").forEach((choice) => {
-      const active = willOpen && choice.dataset.method === selected;
-      choice.setAttribute("aria-expanded", String(active));
-      const panel = document.querySelector(`#method-${choice.dataset.method}`);
-      panel.hidden = !active;
-      if (active && !reducedMotion.matches)
-        panel.animate(
-          [
-            { opacity: 0, transform: "translateY(8px)" },
-            { opacity: 1, transform: "none" },
-          ],
-          { duration: 350, easing: "ease-out" },
-        );
-    });
-  });
-});
-
 // Optional guidance: a useful plan before asking for contact details. No diagnosis or invented availability.
 const situations = {
   Unklar: {
-    label: "Die Situation gemeinsam einordnen",
-    title: "Erst Klarheit. Dann der passende Plan.",
-    description:
-      "Wir besprechen, was Ihnen aufgefallen ist, und klären, ob eine Messung vor Ort sinnvoll ist.",
+    label: "Noch unklar",
+    title: "Ihr Rückruf.",
+    description: "Schaden und Ortstermin telefonisch klären.",
   },
   Wasserschaden: {
-    label: "Wasser ist ausgetreten",
-    title: "Den Schaden eingrenzen. Räume zurückgewinnen.",
-    description:
-      "Nach dem Stoppen des Wasseraustritts prüfen wir, welche Bauteile betroffen sind. Daraus entsteht der Plan für Trocknung und Wiederherstellung.",
+    label: "Wasserschaden",
+    title: "Wasserschaden.",
+    description: "Feuchte messen. Betroffene Bauteile trocknen.",
   },
   "Feuchte Wand": {
-    label: "Wand oder Boden ist feucht",
-    title: "Erst messen. Dann gezielt trocknen.",
-    description:
-      "Wir prüfen Wand, Bodenaufbau und Raumluft. Welche Trocknung sinnvoll ist, entscheiden die Messung und die Situation vor Ort.",
+    label: "Feuchte Wand oder Boden",
+    title: "Feuchte Wand oder Boden.",
+    description: "Messung vor Ort. Trocknung nach Befund.",
   },
   "Neubau / Estrich": {
-    label: "Neubau oder Estrich trocknen",
-    title: "Belegreife prüfen. Den nächsten Schritt planen.",
-    description:
-      "Wir prüfen die Baufeuchte und die Belegreife des Estrichs. Das Trocknungsverfahren richtet sich nach Aufbau und Messung.",
+    label: "Neubau / Estrich",
+    title: "Neubau / Estrich.",
+    description: "Baufeuchte messen. Estrich auf Belegreife prüfen.",
   },
 };
 let selectedSituation = "Unklar";
