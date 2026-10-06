@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Bautrocknung — geschützter Posteingang</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <script src="/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="header wrap">
+      <a class="brand" href="/"
+        >HANTKE<span>.</span><small>PROJEKT-POSTEINGANG</small></a
+      ><button id="logout" hidden class="text-link">Abmelden</button>
+    </header>
+    <main class="wrap admin-main">
+      <h1>Ihre Anfragen.</h1>
+      <p class="intro">Geschützter Posteingang der Website-Vorschau.</p>
+      <form id="login">
+        <label class="field"
+          >Zugangsschlüssel<input
+            id="token"
+            type="password"
+            required
+            autocomplete="off" /></label
+        ><button class="button" type="submit">Posteingang öffnen →</button>
+      </form>
+      <p id="admin-error" role="alert"></p>
+      <div id="inbox" hidden>
+        <div class="inbox-tools">
+          <p id="count" aria-live="polite"></p>
+          <button id="retry" class="text-link">
+            Ausstehende E-Mails erneut senden</button
+          ><button id="refresh" class="text-link">Aktualisieren ↻</button>
+        </div>
+        <div id="requests"></div>
+      </div>
+    </main>
+  </body>
+</html>

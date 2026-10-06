@@ -1,0 +1,11 @@
+{
+  "name": "hantke-bautrocknung",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test": "node --test tests/worker.test.mjs"
+  }
+}

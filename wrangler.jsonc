@@ -1,0 +1,19 @@
+{
+  "name": "hantke-bautrocknung-preview",
+  "main": "dist/worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hantke-bautrocknung-preview",
+      "database_id": "4ead7720-d505-45e5-9389-05a15d222c8e",
+    },
+  ],
+  "vars": {
+    "SITE_URL": "https://hantke-bautrocknung-preview.ksqsebastian.workers.dev",
+    "MAIL_TO": "ksqsebastian@googlemail.com",
+    "MAIL_FROM": "Bautrocknung Projekt <onboarding@resend.dev>",
+  },
+  "triggers": { "crons": ["*/15 * * * *"] },
+}
