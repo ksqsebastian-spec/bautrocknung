@@ -208,3 +208,41 @@ test("expired records are removed and static resources have security headers", a
   );
   sql.close();
 });
+
+test("manual mail retry never replays an expired idempotency window", async () => {
+  const { env, sql } = fixture();
+  const stale = new Date(Date.now() - 30 * 3600000).toISOString();
+  const recent = new Date(Date.now() - 2 * 3600000).toISOString();
+  const insert = sql.prepare(
+    "INSERT INTO requests(id,phone,postcode,problem,created_at,ip_hash) VALUES(?,?,?,?,?,?)",
+  );
+  insert.run(randomUUID(), "0000000001", "22529", "Unklar", stale, "test");
+  insert.run(randomUUID(), "0000000002", "22529", "Unklar", recent, "test");
+  const original = globalThis.fetch;
+  let mails = 0;
+  globalThis.fetch = async () => {
+    mails++;
+    return Response.json({ id: "recent-mail" });
+  };
+  try {
+    const response = await worker.fetch(
+      new Request("https://example.invalid/api/admin/retry", {
+        method: "POST",
+        headers: { Authorization: "Bearer test-admin-token" },
+      }),
+      env,
+    );
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).results.length, 1);
+    assert.equal(mails, 1);
+    assert.equal(
+      sql
+        .prepare("SELECT notified FROM requests WHERE phone='0000000001'")
+        .get().notified,
+      "pending",
+    );
+  } finally {
+    globalThis.fetch = original;
+    sql.close();
+  }
+});

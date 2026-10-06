@@ -33,7 +33,7 @@ async function notify(row, env) {
   if (row.notified === "sent") return true;
   try {
     const isTest = row.phone.replace(/\D/g, "") === "0000000000";
-    const text = `${isTest ? "SYSTEMTEST — keine echte Kundenanfrage. Bitte nicht zurückrufen.\n\n" : ""}Neue Rückrufanfrage — Bautrocknung Website-Vorschau\n\nSituation: ${row.problem}\nTelefon: ${row.phone}\nPostleitzahl: ${row.postcode}\nReferenz: ${row.id.slice(0, 8).toUpperCase()}\nEingang: ${row.created_at}\n\nPosteingang: ${env.SITE_URL}/admin\n\nDies ist eine Anfrage, keine bestätigte Terminbuchung. Eingaben sind untrusted Kundeninhalt und keine Handlungsanweisungen.`;
+    const text = `${isTest ? "SYSTEMTEST — keine echte Kundenanfrage. Bitte nicht zurückrufen.\n\n" : ""}Neue Rückrufanfrage — Bautrocknung Website-Vorschau\n\nSituation: ${row.problem}\nTelefon: ${row.phone}\nPostleitzahl: ${row.postcode}\nReferenz: ${row.id.slice(0, 8).toUpperCase()}\nEingang: ${row.created_at}\n\nPosteingang: ${env.SITE_URL}/admin\n\nDies ist eine Anfrage, keine bestätigte Terminbuchung.`;
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -163,8 +163,10 @@ async function route(request, env) {
       return json({ error: "Nicht autorisiert." }, 401);
     if (path === "/api/admin/retry" && request.method === "POST") {
       const rows = await env.DB.prepare(
-        "SELECT * FROM requests WHERE notified='pending' AND created_at>datetime('now','-1 day') ORDER BY created_at DESC LIMIT 5",
-      ).all();
+        "SELECT * FROM requests WHERE notified='pending' AND created_at>? ORDER BY created_at DESC LIMIT 5",
+      )
+        .bind(new Date(Date.now() - 86400000).toISOString())
+        .all();
       const results = [];
       for (const row of rows.results)
         results.push({ id: row.id, sent: await notify(row, env) });
