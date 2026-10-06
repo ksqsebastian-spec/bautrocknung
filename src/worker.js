@@ -33,7 +33,7 @@ async function notify(row, env) {
   if (row.notified === "sent") return true;
   try {
     const isTest = row.phone.replace(/\D/g, "") === "0000000000";
-    const text = `${isTest ? "SYSTEMTEST — keine echte Kundenanfrage. Bitte nicht zurückrufen.\n\n" : ""}Neue Rückrufanfrage — Bautrocknung Website-Vorschau\n\nSituation: ${row.problem}\nTelefon: ${row.phone}\nPostleitzahl: ${row.postcode}\nReferenz: ${row.id.slice(0, 8).toUpperCase()}\nEingang: ${row.created_at}\n\nPosteingang: ${env.SITE_URL}/admin\n\nDies ist eine Anfrage, keine bestätigte Terminbuchung.`;
+    const text = `${isTest ? "SYSTEMTEST — keine echte Kundenanfrage. Bitte nicht zurückrufen.\n\n" : ""}Neue Rückrufanfrage — Bautrocknung Website-Vorschau\n\nSituation: ${row.problem}\nTelefon: ${row.phone}\nPostleitzahl: ${row.postcode}\nReferenz: ${row.id.slice(0, 8).toUpperCase()}\nEingang: ${row.created_at}\n\nRückrufziel: innerhalb von zwei Geschäftsstunden ab Eingang. Ortstermin persönlich abstimmen.\n\nPosteingang: ${env.SITE_URL}/admin\n\nDies ist eine Anfrage, keine bestätigte Terminbuchung.`;
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {

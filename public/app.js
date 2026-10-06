@@ -3,36 +3,12 @@ const dialog = document.querySelector("#request-dialog");
 const form = document.querySelector("#request-form");
 let trigger = null,
   requestId = crypto.randomUUID();
-const showStep = (step) => {
-  dialog.setAttribute(
-    "aria-labelledby",
-    step === 1 ? "request-title" : "contact-title",
-  );
-  document.querySelector("#problem-step").hidden = step !== 1;
-  document.querySelector("#contact-step").hidden = step !== 2;
-  document.querySelector("#step-label").textContent = `Schritt ${step} von 2`;
-  document.querySelector("#progress-bar").style.width =
-    step === 1 ? "50%" : "100%";
-  document.querySelectorAll("#contact-step input").forEach((input) => {
-    input.disabled = step !== 2;
-  });
-  const panel = document.querySelector(
-    step === 1 ? "#problem-step" : "#contact-step",
-  );
-  if (dialog.open && !reducedMotion.matches)
-    panel.animate(
-      [
-        { opacity: 0, transform: "translateY(12px)" },
-        { opacity: 1, transform: "none" },
-      ],
-      { duration: 350, easing: "ease-out" },
-    );
-};
 function openRequest(event) {
   trigger = event.currentTarget;
   document.querySelector("#request-flow").hidden = false;
   document.querySelector("#request-success").hidden = true;
-  showStep(1);
+  dialog.setAttribute("aria-labelledby", "request-title");
+  document.querySelector("#form-error").hidden = true;
   closeMenu();
   dialog.showModal();
   document.querySelector("#request-title").focus({ preventScroll: true });
@@ -103,25 +79,8 @@ dialog.addEventListener("click", (e) => {
       closeRequest();
   }
 });
-document.querySelector("#next-step").addEventListener("click", () => {
-  const radios = form.querySelectorAll("[name=problem]");
-  if (!form.querySelector("[name=problem]:checked")) {
-    radios[0].reportValidity();
-    return;
-  }
-  showStep(2);
-  form.elements.phone.focus();
-});
-document.querySelector("#back-step").addEventListener("click", () => {
-  showStep(1);
-  form.querySelector("[name=problem]:checked")?.focus();
-});
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  if (!document.querySelector("#problem-step").hidden) {
-    document.querySelector("#next-step").click();
-    return;
-  }
   if (!form.reportValidity()) return;
   const button = document.querySelector("#submit-request"),
     error = document.querySelector("#form-error");
@@ -147,7 +106,7 @@ form.addEventListener("submit", async (e) => {
     dialog.setAttribute("aria-labelledby", "success-title");
     document.querySelector("#reference").textContent = result.reference;
     document.querySelector("#success-message").textContent = result.notified
-      ? "Ihre Rückrufanfrage wurde per E-Mail an das Projektteam weitergeleitet. Der nächste Schritt wird persönlich mit Ihnen abgestimmt."
+      ? "Ihre Anfrage wurde per E-Mail an das Projektteam weitergeleitet. Wir rufen Sie binnen 2 Geschäftsstunden zurück und stimmen den nächsten Schritt persönlich ab."
       : "Ihre Anfrage ist sicher gespeichert. Die E-Mail-Zustellung wird erneut versucht. Das Projektteam kann Ihre Anfrage auch im geschützten Posteingang sehen.";
     document.querySelector("#success-close").focus();
     form.reset();
@@ -280,5 +239,29 @@ document.querySelectorAll(".faq details").forEach((details) => {
       if (wasOpen) details.open = false;
       animation = null;
     };
+  });
+});
+
+// A short technical explanation, never a simulated measurement or live dashboard.
+const engineering = document.querySelector(".engineering-visual");
+document.querySelectorAll("[data-method]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const selected = button.dataset.method;
+    const willOpen = button.getAttribute("aria-expanded") !== "true";
+    document.querySelectorAll("[data-method]").forEach((choice) => {
+      const active = willOpen && choice.dataset.method === selected;
+      choice.setAttribute("aria-expanded", String(active));
+      const panel = document.querySelector(`#method-${choice.dataset.method}`);
+      panel.hidden = !active;
+      if (active && !reducedMotion.matches)
+        panel.animate(
+          [
+            { opacity: 0, transform: "translateY(8px)" },
+            { opacity: 1, transform: "none" },
+          ],
+          { duration: 350, easing: "ease-out" },
+        );
+    });
+    if (engineering) engineering.dataset.phase = willOpen ? selected : "none";
   });
 });

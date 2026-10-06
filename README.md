@@ -49,3 +49,7 @@ The D1 schema is in `schema.sql`.
 See DESIGN.md for actual Mobbin references, source facts, rejected patterns and the value equation. The concept image is a local layout reference only and is not served on the website. The current Cover-inspired version uses two real Unsplash architectural photographs as labelled symbol images. It has a full-screen photographic opening, self-hosted Instrument Serif and DM Sans, native scroll parallax and framing, finite entry motion, section reveals, animated FAQs and an accessible enquiry drawer. Reduced-motion preferences suppress animations. See QA.md for the concept comparison and live checks. No generated people, synthetic project photos, fake ratings or fake availability.
 
 This is a noindex design preview. Brand/service facts come from the Hantke source page, while form submissions go to the user's project inbox. The form and privacy page disclose that distinction. Review the operator's legal details before turning the preview into the business's production site.
+
+## Current B2C refinement
+
+See VALUE-AUDIT.md and VALUE-QA.md for the new screenshot audit and verification. The current one-screen form requires only phone/postcode; situation is optional. The two-business-hour callback commitment was confirmed by the user and is carried in the website and operator notification. It is a human service promise, not automatic calling or confirmed on-site dispatch. The new floor image is a labelled educational schematic, not a project photograph.

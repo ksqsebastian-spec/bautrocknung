@@ -84,3 +84,17 @@ Process prompt: stone surface, “Ein Anruf. Ein klarer Plan.” left, explanati
 FAQ prompt: “Gut zu wissen.” left, ruled questions right; photographic closing “Der erste Schritt ist einfach.” with white help action and factual footer.
 
 Generated explanatory text was replaced with verified service wording wherever it invented guarantees, cost certainty or health claims. The generated process font drifted from the requested typography; implementation consistently uses the specified Instrument Serif across all sections.
+
+## Value-focused B2C refinement — 2026-10-06
+
+See VALUE-AUDIT.md for the fresh screenshot audit and official Hormozi sources. The previous image-led version communicated an attractive outcome but buried technical evidence and lacked a concrete reply commitment. The user confirmed a callback within two business hours; this was added as a human service commitment, separate from on-site availability and physical drying duration.
+
+Current hero: “Wieder trocken. Bis zur fertigen Wand.” Editorial serif plus clear sans supporting line. Local Meisterbetrieb evidence, one accountable contact, an explicit Rückruf action and reply deadline now appear in the opening. A concise mobile version of the supporting copy prevents first-viewport overload.
+
+The second architectural photo block was replaced with a four-layer principle illustration and three optional explanations: Feuchte orten / Passend trocknen / Ergebnis belegen. The schematic is an original generated educational asset, labelled as such; no fake measurement readings or customer results. Native labels remain code text. Service coverage stays visible below.
+
+The enquiry form is one screen with two required fields (phone/postcode), optional situation, the actual preview recipient disclosure and the two-business-hour promise. No account, upload or diagnosis is required. The operator notification includes the reply target.
+
+Fresh built-in Image Gen layout concepts: `../research/value-concepts/hero.png`, `technical.png`, `form.png`. These mockups are not served. The model introduced unrelated nav, uppercase branding, an inappropriate example postcode and “accept privacy” wording; implementation deliberately retained the real Hantke wordmark/nav, Hamburg postcode example and accurate privacy information.
+
+Asset prompt: standalone four-layer architectural exploded floor principle, thin oak covering / light screed / pale insulation / dense concrete, neutral stone, soft shadows, no words, apparatus, numerical data or project claims. Output converted to JPEG for self-hosted delivery at `public/floor-principle.jpg`.
